@@ -1,189 +1,282 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8" />
-  <title>AI 大模型导航站｜241313.xyz</title>
-  <meta name="description" content="最全 AI 大模型导航站 241313.xyz，收录 ChatGPT、Claude、Gemini、Grok、LLaMA 等主流 AI 模型，适合新手、创作者与开发者。" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MUSY AI 导航</title>
+  <!-- Tailwind CSS v4 via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            background: 'rgb(var(--background) / <alpha-value>)',
+            foreground: 'rgb(var(--foreground) / <alpha-value>)',
+            card: 'rgb(var(--card) / <alpha-value>)',
+            border: 'rgb(var(--border) / <alpha-value>)',
+            accent: 'rgb(var(--accent) / <alpha-value>)',
+            'muted-foreground': 'rgb(var(--muted-foreground) / <alpha-value>)',
+            primary: 'rgb(var(--primary) / <alpha-value>)',
+            'primary-foreground': 'rgb(var(--primary-foreground) / <alpha-value>)',
+          }
+        }
+      }
+    }
+
+    // 初始化主题
+    function initTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else if (saved === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
+    }
+
+    // 切换主题
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    // 页面加载完成后初始化主题
+    window.addEventListener('DOMContentLoaded', initTheme);
+  </script>
+
+  <!-- 自定义 CSS 变量（浅色 & 深色） -->
   <style>
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
+      --card: 0 0% 100%;
+      --border: 214.3 31.8% 91.4%;
+      --accent: 214.3 31.8% 91.4%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+      --primary: 222.2 47.4% 11.2%;
+      --primary-foreground: 210 40% 98%;
+    }
+
+    .dark {
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+      --card: 222.2 84% 4.9%;
+      --border: 217.2 32.6% 17.5%;
+      --accent: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f6f7f9;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background: #111827;
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0 0 10px;
-      font-size: 32px;
-    }
-    header p {
-      margin: 0;
-      color: #c7d2fe;
-    }
-    main {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    section {
-      margin-bottom: 50px;
-    }
-    h2 {
-      border-left: 5px solid #6366f1;
-      padding-left: 12px;
-      margin-bottom: 25px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-    }
-    .card h3 {
-      margin-top: 0;
-    }
-    .tag {
-      display: inline-block;
-      background: #eef2ff;
-      color: #3730a3;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      margin-right: 6px;
-      margin-top: 6px;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 12px;
-      text-decoration: none;
-      background: #6366f1;
-      color: #fff;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 14px;
-      color: #666;
+      background-color: rgb(var(--background));
+      color: rgb(var(--foreground));
+      transition: background-color 0.3s, color 0.3s;
     }
   </style>
 </head>
-<body>
-
-<header>
-  <h1>🤖 MUSY AI 大模型导航站</h1>
-  <p>收录全球主流 AI 大模型 · 新手 / 创作者 / 开发者必备</p>
-</header>
-
-<main>
-
-  <!-- 通用大模型 -->
-  <section>
-    <h2>🔥 通用 AI 大模型</h2>
-    <div class="grid">
-
-      <div class="card">
-        <h3>ChatGPT（OpenAI）</h3>
-        <p>通用对话、写作、代码、分析能力最强的大模型之一。</p>
-        <div class="tag">适合：新手 / 写作 / 编程</div>
-        <div class="tag">会员：有（Plus）</div>
-        <a class="btn" href="https://chat.openai.com" target="_blank">访问官网</a>
+<body class="min-h-screen flex flex-col bg-background text-foreground">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border px-6 py-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="text-2xl font-bold">241313</div>
+      <div class="flex items-center gap-3">
+        <button onclick="toggleTheme()" class="p-2.5 rounded-full hover:bg-accent transition-colors" aria-label="切换主题">
+          <!-- 太阳/月亮图标用文字代替（避免额外依赖） -->
+          <span class="dark:hidden">🌙</span>
+          <span class="hidden dark:inline">☀️</span>
+        </button>
+        <button class="px-5 py-2 text-sm hover:bg-accent rounded transition-colors">提交链接</button>
       </div>
-
-      <div class="card">
-        <h3>Claude（Anthropic）</h3>
-        <p>擅长长文本理解、逻辑推理，输出更稳重。</p>
-        <div class="tag">适合：专业写作 / 合同 / 深度分析</div>
-        <div class="tag">会员：有</div>
-        <a class="btn" href="https://claude.ai" target="_blank">访问官网</a>
-      </div>
-
-      <div class="card">
-        <h3>Gemini（Google）</h3>
-        <p>结合 Google 搜索与多模态能力的 AI。</p>
-        <div class="tag">适合：搜索 / 研究</div>
-        <div class="tag">会员：部分付费</div>
-        <a class="btn" href="https://gemini.google.com" target="_blank">访问官网</a>
-      </div>
-
-      <div class="card">
-        <h3>Grok（xAI）</h3>
-        <p>强调实时信息与社交数据交互的 AI。</p>
-        <div class="tag">适合：实时资讯 / 互动</div>
-        <div class="tag">会员：X 高级订阅</div>
-        <a class="btn" href="https://x.ai" target="_blank">访问官网</a>
-      </div>
-
     </div>
-  </section>
+  </header>
 
-  <!-- 多模型聚合 -->
-  <section>
-    <h2>🧩 多模型聚合平台</h2>
-    <div class="grid">
+  <!-- Main -->
+  <main class="flex-1 flex flex-col items-center px-6 py-16 max-w-7xl mx-auto">
+    <h1 class="text-4xl font-normal text-muted-foreground mb-8">MUSY AI 导航</h1>
 
-      <div class="card">
-        <h3>POE</h3>
-        <p>一个平台使用 ChatGPT、Claude、Gemini 等多个模型。</p>
-        <div class="tag">适合：模型对比</div>
-        <div class="tag">会员：可选</div>
-        <a class="btn" href="https://poe.com" target="_blank">访问官网</a>
-      </div>
-
-      <div class="card">
-        <h3>LMArena</h3>
-        <p>对比不同 AI 模型回答质量并进行投票排名。</p>
-        <div class="tag">适合：AI 爱好者</div>
-        <div class="tag">会员：无需</div>
-        <a class="btn" href="https://lmarena.ai" target="_blank">访问官网</a>
-      </div>
-
+    <!-- Bing 搜索框 -->
+    <div class="relative w-full max-w-2xl mb-12">
+      <form onsubmit="searchBing(event)" class="relative">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="搜索..."
+          class="w-full px-6 py-4 rounded-full border border-border bg-background focus:border-primary outline-none transition-colors"
+        />
+        <button
+          type="submit"
+          class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium"
+        >
+          搜索
+        </button>
+      </form>
     </div>
-  </section>
 
-  <!-- 开源与开发者 -->
-  <section>
-    <h2>🧠 开源 / 开发者模型</h2>
-    <div class="grid">
-
-      <div class="card">
-        <h3>Hugging Face</h3>
-        <p>全球最大的开源 AI 模型社区与模型下载平台。</p>
-        <div class="tag">适合：开发者 / 研究者</div>
-        <div class="tag">会员：基础免费</div>
-        <a class="btn" href="https://huggingface.co" target="_blank">访问官网</a>
+    <!-- 分类网格 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl">
+      <!-- AI 工具 -->
+      <div class="bg-card border border-border rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-muted-foreground/20">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-xl">🤖</div>
+          <h2 class="font-medium text-foreground">AI 工具</h2>
+        </div>
+        <div class="space-y-2.5">
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">ChatGPT</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Midjourney</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Stable Diffusion</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Claude</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Gemini</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Copilot</a>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>LLaMA（Meta）</h3>
-        <p>Meta 发布的开源大模型系列，可自行部署。</p>
-        <div class="tag">适合：自部署 / 企业</div>
-        <div class="tag">会员：免费</div>
-        <a class="btn" href="https://ai.meta.com" target="_blank">访问官网</a>
+      <!-- 开发工具 -->
+      <div class="bg-card border border-border rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-muted-foreground/20">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-xl">💻</div>
+          <h2 class="font-medium text-foreground">开发工具</h2>
+        </div>
+        <div class="space-y-2.5">
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">GitHub</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">VSCode</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Stack Overflow</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">CodePen</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Figma</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Vercel</a>
+        </div>
       </div>
 
+      <!-- 设计资源 -->
+      <div class="bg-card border border-border rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-muted-foreground/20">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-xl">🎨</div>
+          <h2 class="font-medium text-foreground">设计资源</h2>
+        </div>
+        <div class="space-y-2.5">
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Dribbble</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Behance</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Unsplash</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Figma</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Adobe</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Canva</a>
+        </div>
+      </div>
+
+      <!-- 学习平台 -->
+      <div class="bg-card border border-border rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-muted-foreground/20">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-xl">📚</div>
+          <h2 class="font-medium text-foreground">学习平台</h2>
+        </div>
+        <div class="space-y-2.5">
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Coursera</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Udemy</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Khan Academy</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">edX</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Codecademy</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">freeCodeCamp</a>
+        </div>
+      </div>
+
+      <!-- 影音娱乐 -->
+      <div class="bg-card border border-border rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-muted-foreground/20">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-xl">🎬</div>
+          <h2 class="font-medium text-foreground">影音娱乐</h2>
+        </div>
+        <div class="space-y-2.5">
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">YouTube</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Netflix</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Spotify</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Bilibili</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">爱奇艺</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">腾讯视频</a>
+        </div>
+      </div>
+
+      <!-- 效率工具 -->
+      <div class="bg-card border border-border rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-muted-foreground/20">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-xl">🛠️</div>
+          <h2 class="font-medium text-foreground">效率工具</h2>
+        </div>
+        <div class="space-y-2.5">
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Notion</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Trello</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Asana</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Slack</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Zoom</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Google Workspace</a>
+        </div>
+      </div>
+
+      <!-- 资讯媒体 -->
+      <div class="bg-card border border-border rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-muted-foreground/20">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-xl">📰</div>
+          <h2 class="font-medium text-foreground">资讯媒体</h2>
+        </div>
+        <div class="space-y-2.5">
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Hacker News</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Medium</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Reddit</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">知乎</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">V2EX</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">少数派</a>
+        </div>
+      </div>
+
+      <!-- 电商购物 -->
+      <div class="bg-card border border-border rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-muted-foreground/20">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-xl">🛍️</div>
+          <h2 class="font-medium text-foreground">电商购物</h2>
+        </div>
+        <div class="space-y-2.5">
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">淘宝</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">京东</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Amazon</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">eBay</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">拼多多</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">天猫</a>
+        </div>
+      </div>
+
+      <!-- 社交网络 -->
+      <div class="bg-card border border-border rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-muted-foreground/20">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-xl">🌐</div>
+          <h2 class="font-medium text-foreground">社交网络</h2>
+        </div>
+        <div class="space-y-2.5">
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Twitter</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Instagram</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">Facebook</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">微博</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">小红书</a>
+          <a href="#" class="block text-sm text-muted-foreground transition-all duration-150 hover:text-primary hover:translate-x-1">LinkedIn</a>
+        </div>
+      </div>
     </div>
-  </section>
+  </main>
 
-</main>
+  <!-- Footer -->
+  <footer class="py-8 border-t border-border text-center text-sm text-muted-foreground">
+    © 2026 241313.xyz | 开源共建 | GitHub
+  </footer>
 
-<footer>
-  © 2026 AI 导航站 · 241313.xyz · 适合新手快速了解 AI 世界
-</footer>
-
+  <script>
+    function searchBing(e) {
+      e.preventDefault();
+      const query = document.getElementById('searchInput').value.trim();
+      if (query) {
+        window.open(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, '_blank');
+      }
+    }
+  </script>
 </body>
 </html>
